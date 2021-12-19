@@ -17,6 +17,114 @@ struct Mesh {
 }
 
 fn main() {
+
+    let meshCube = Mesh {
+        tris: vec![
+            // SOUTH
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                    ]
+            },
+            // EAST
+            Triangle {
+                points: 
+                    [
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                    ]
+            },
+            // NORTH
+            Triangle {
+                points: 
+                    [
+                    Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                    Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                    Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
+                    ]
+            },
+            // WEST
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                    ]
+            },
+            // TOP
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                    ]
+            },
+            // BOTTON
+            Triangle {
+                points: 
+                    [
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                    ]
+            },
+            Triangle {
+                points: 
+                    [
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                    ]
+            },
+        ],
+    };
+
     // initializes a screen of 20x10 characters with a target of 3 frames per second
     // coordinates will range from [0,0] to [19,9]
     let mut engine = console_engine::ConsoleEngine::init(20, 10, 3).unwrap();
