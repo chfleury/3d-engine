@@ -17,7 +17,8 @@ struct Mesh {
 }
 
 struct Matrix4x4 {
-    m: [[f32; 4]; 4],
+    m: [[f64; 4]; 4],
+
 }
 
 fn draw_triangle(engine: &mut console_engine::ConsoleEngine ,x1: i32, y1: i32, x2:i32, y2:i32, x3:i32, y3:i32) {
@@ -135,7 +136,27 @@ fn main() {
         ],
     };
 
-    let fNear = 0
+    let height = 40;
+    let width = 100;
+
+    let fNear = 0.1;
+    let fFar = 1000.0;
+    let fFov = 90.0;
+    let fAspectRatio = height/width;
+    let y =  (fFov * 0.5/ 180.0 * 3.14159) as f64;
+    let fFovRad  = 1.0/ y.tan();
+
+    let mut projection_matrix = Matrix4x4 {
+        m: [[0.0; 4]; 4],
+    };
+
+    projection_matrix.m[0][0] = fAspectRatio *fFovRad;
+    projection_matrix.m[1][1] = fFovRad;
+    projection_matrix.m[2][2] = fFar/ (fFar - fNear);
+    projection_matrix.m[3][2] = (-fFar * fNear) / (fFar - fNear);
+    projection_matrix.m[2][3] = 1.0;
+    projection_matrix.m[3][3] = 0.0;
+
     // initializes a screen of 20x10 characters with a target of 3 frames per second
     // coordinates will range from [0,0] to [19,9]
     let mut engine = console_engine::ConsoleEngine::init(20, 10, 3).unwrap();
