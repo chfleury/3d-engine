@@ -16,6 +16,10 @@ struct Mesh {
     tris: Vec<Triangle>,
 }
 
+struct Matrix4x4 {
+    m: [[i32; 4]; 4],
+}
+
 fn draw_triangle(engine: &mut console_engine::ConsoleEngine ,x1: i32, y1: i32, x2:i32, y2:i32, x3:i32, y3:i32) {
     engine.line(x1, y1, x2, y2, pixel::pxl('#'));
     engine.line(x2, y2, x3, y3, pixel::pxl('#'));
