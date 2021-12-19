@@ -17,7 +17,7 @@ struct Mesh {
 }
 
 struct Matrix4x4 {
-    m: [[i32; 4]; 4],
+    m: [[f32; 4]; 4],
 }
 
 fn draw_triangle(engine: &mut console_engine::ConsoleEngine ,x1: i32, y1: i32, x2:i32, y2:i32, x3:i32, y3:i32) {
@@ -135,6 +135,7 @@ fn main() {
         ],
     };
 
+    let fNear = 0
     // initializes a screen of 20x10 characters with a target of 3 frames per second
     // coordinates will range from [0,0] to [19,9]
     let mut engine = console_engine::ConsoleEngine::init(20, 10, 3).unwrap();
@@ -153,7 +154,7 @@ fn main() {
             break; // exits app
         }
     
-        
+
         engine.draw(); // draw the screen
     }
 }
