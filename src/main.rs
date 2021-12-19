@@ -47,7 +47,7 @@ fn multiply_matrix_point(i: &Point, o: &mut Point, m: &Matrix4x4) {
 }
 
 fn main() {
-    let height = 35.0;
+    let height = 33.0;
     let width = 149.0;
 
     let f_near = 0.1;
@@ -66,7 +66,7 @@ fn main() {
     projection_matrix.m[2][3] = 1.0;
     projection_matrix.m[3][3] = 0.0;
 
-    let mut engine = console_engine::ConsoleEngine::init(149, 35, 3).unwrap();
+    let mut engine = console_engine::ConsoleEngine::init(149, 33, 3).unwrap();
     let _value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
     loop {
@@ -333,18 +333,23 @@ fn main() {
                 ],
             };
 
+            let mut triangle_translated = triangle;
+            triangle_translated.points[0].z += 1.2;
+            triangle_translated.points[1].z += 1.2;
+            triangle_translated.points[2].z += 1.2;
+
             multiply_matrix_point(
-                &triangle.points[0],
+                &triangle_translated.points[0],
                 &mut triangle_projected.points[0],
                 &projection_matrix,
             );
             multiply_matrix_point(
-                &triangle.points[1],
+                &triangle_translated.points[1],
                 &mut triangle_projected.points[1],
                 &projection_matrix,
             );
             multiply_matrix_point(
-                &triangle.points[2],
+                &triangle_translated.points[2],
                 &mut triangle_projected.points[2],
                 &projection_matrix,
             );
