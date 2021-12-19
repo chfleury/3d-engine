@@ -3,9 +3,9 @@ use console_engine::pixel;
 use console_engine::KeyCode;
 
 struct Point {
-    x: f32,
-    y: f32,
-    z: f32,
+    x: i32,
+    y: i32,
+    z: i32,
 }
 
 struct Triangle {
@@ -34,102 +34,102 @@ fn main() {
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 0, y: 0, z: 0},
+                     Point { x: 0, y: 1, z: 0},
+                     Point { x: 1, y: 1, z: 0},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 0, y: 0, z: 0},
+                     Point { x: 1, y: 1, z: 0},
+                     Point { x: 1, y: 0, z: 0},
                     ]
             },
             // EAST
             Triangle {
                 points: 
                     [
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 1, y: 0, z: 0},
+                     Point { x: 1, y: 1, z: 0},
+                     Point { x: 1, y: 1, z: 1},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 1, y: 0, z: 0},
+                     Point { x: 1, y: 1, z: 1},
+                     Point { x: 1, y: 0, z: 1},
                     ]
             },
             // NORTH
             Triangle {
                 points: 
                     [
-                    Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
-                    Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
-                    Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
+                    Point { x: 1, y: 0, z: 1},
+                    Point { x: 1, y: 1, z: 1},
+                    Point { x: 0, y: 1, z: 1},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
+                     Point { x: 1, y: 0, z: 1},
+                     Point { x: 0, y: 1, z: 1},
+                     Point { x: 0, y: 0, z: 1},
                     ]
             },
             // WEST
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 0, y: 0, z: 1},
+                     Point { x: 0, y: 1, z: 1},
+                     Point { x: 0, y: 1, z: 0},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 0, y: 0, z: 1},
+                     Point { x: 0, y: 1, z: 0},
+                     Point { x: 0, y: 0, z: 0},
                     ]
             },
             // TOP
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 1.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
+                     Point { x: 0, y: 1, z: 0},
+                     Point { x: 0, y: 1, z: 1},
+                     Point { x: 1, y: 1, z: 1},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 0.0_f32, y: 1.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 1.0_f32},
-                     Point { x: 1.0_f32, y: 1.0_f32, z: 0.0_f32},
+                     Point { x: 0, y: 1, z: 0},
+                     Point { x: 1, y: 1, z: 1},
+                     Point { x: 1, y: 1, z: 0},
                     ]
             },
             // BOTTON
             Triangle {
                 points: 
                     [
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1, y: 0, z: 1},
+                     Point { x: 0, y: 0, z: 1},
+                     Point { x: 0, y: 0, z: 0},
                     ]
             },
             Triangle {
                 points: 
                     [
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 1.0_f32},
-                     Point { x: 0.0_f32, y: 0.0_f32, z: 0.0_f32},
-                     Point { x: 1.0_f32, y: 0.0_f32, z: 0.0_f32},
+                     Point { x: 1, y: 0, z: 1},
+                     Point { x: 0, y: 0, z: 0},
+                     Point { x: 1, y: 0, z: 0},
                     ]
             },
         ],
