@@ -2,6 +2,20 @@ use console_engine::pixel;
 use console_engine::Color;
 use console_engine::KeyCode;
 
+struct Point {
+    x: f32,
+    y: f32,
+    z: f32,
+}
+
+struct Triangle {
+    points: [Point; 3],
+}
+
+struct Mesh {
+    tris: Vec<Triangle>,
+}
+
 fn main() {
     // initializes a screen of 20x10 characters with a target of 3 frames per second
     // coordinates will range from [0,0] to [19,9]
