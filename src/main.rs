@@ -1,5 +1,5 @@
 use console_engine::pixel;
-use console_engine::Color;
+// use console_engine::Color;
 use console_engine::KeyCode;
 
 struct Point {
@@ -14,6 +14,12 @@ struct Triangle {
 
 struct Mesh {
     tris: Vec<Triangle>,
+}
+
+fn draw_triangle(engine: &mut console_engine::ConsoleEngine ,x1: i32, y1: i32, x2:i32, y2:i32, x3:i32, y3:i32) {
+    engine.line(x1, y1, x2, y2, pixel::pxl('#'));
+    engine.line(x2, y2, x3, y3, pixel::pxl('#'));
+    engine.line(x3, y3, x1, y1, pixel::pxl('#'));
 }
 
 fn main() {
@@ -131,13 +137,13 @@ fn main() {
     let value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
     loop {
+
         engine.wait_frame(); // wait for next frame + capture inputs
         engine.clear_screen(); // reset the screen
     
-        engine.line(0, 0, 19, 9, pixel::pxl('#')); // draw a line of '#' from [0,0] to [19,9]
-        engine.print(0, 4, format!("Result: {}", value).as_str()); // prints some value at [0,4]
-    
-        engine.set_pxl(4, 0, pixel::pxl_fg('O', Color::Cyan)); // write a majestic cyan 'O' at [4,0]
+      
+        draw_triangle(&mut engine, 0, 0, 0,10, 10, 0);
+        
 
         if engine.is_key_pressed(KeyCode::Char('q')) { // if the user presses 'q' :
             break; // exits app
