@@ -1,7 +1,6 @@
 use console_engine::pixel;
 // use console_engine::Color;
 use console_engine::KeyCode;
-
 struct Point {
     x: f64,
     y: f64,
@@ -48,316 +47,338 @@ fn multiply_matrix_point(i: &Point, o: &mut Point, m: &Matrix4x4) {
 }
 
 fn main() {
-    let mesh_cube = Mesh {
-        tris: vec![
-            // SOUTH
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            // EAST
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                ],
-            },
-            // NORTH
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                ],
-            },
-            // WEST
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            // TOP
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 0.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 1.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            // BOTTON
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-            Triangle {
-                points: [
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 1.0_f64,
-                    },
-                    Point {
-                        x: 0.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                    Point {
-                        x: 1.0_f64,
-                        y: 0.0_f64,
-                        z: 0.0_f64,
-                    },
-                ],
-            },
-        ],
-    };
+    let height = 35.0;
+    let width = 149.0;
 
-    let height = 40.0;
-    let width = 100.0;
-
-    let fNear = 0.1;
-    let fFar = 1000.0;
-    let fFov = 90.0;
-    let fAspectRatio = height / width as f64;
-    let y = (fFov * 0.5 / 180.0 * 3.14159) as f64;
-    let fFovRad = 1.0 / y.tan();
+    let f_near = 0.1;
+    let f_far = 1000.0;
+    let f_fov = 90.0;
+    let f_aspect_ratio = height / width as f64;
+    let y = (f_fov * 0.5 / 180.0 * 3.14159) as f64;
+    let f_fov_rad = 1.0 / y.tan();
 
     let mut projection_matrix = Matrix4x4 { m: [[0.0; 4]; 4] };
 
-    projection_matrix.m[0][0] = fAspectRatio * fFovRad;
-    projection_matrix.m[1][1] = fFovRad;
-    projection_matrix.m[2][2] = fFar / (fFar - fNear);
-    projection_matrix.m[3][2] = (-fFar * fNear) / (fFar - fNear);
+    projection_matrix.m[0][0] = f_aspect_ratio * f_fov_rad;
+    projection_matrix.m[1][1] = f_fov_rad;
+    projection_matrix.m[2][2] = f_far / (f_far - f_near);
+    projection_matrix.m[3][2] = (-f_far * f_near) / (f_far - f_near);
     projection_matrix.m[2][3] = 1.0;
     projection_matrix.m[3][3] = 0.0;
 
-    for triangle in mesh_cube.tris {
-        let mut triangle_projected = Triangle {
-            points: [
-                Point {
-                    x: 0.0_f64,
-                    y: 0.0_f64,
-                    z: 0.0_f64,
-                },
-                Point {
-                    x: 0.0_f64,
-                    y: 0.0_f64,
-                    z: 0.0_f64,
-                },
-                Point {
-                    x: 0.0_f64,
-                    y: 0.0_f64,
-                    z: 0.0_f64,
-                },
-            ],
-        };
-
-        multiply_matrix_point(
-            &triangle.points[0],
-            &mut triangle_projected.points[0],
-            &projection_matrix,
-        );
-        multiply_matrix_point(
-            &triangle.points[1],
-            &mut triangle_projected.points[1],
-            &projection_matrix,
-        );
-        multiply_matrix_point(
-            &triangle.points[2],
-            &mut triangle_projected.points[2],
-            &projection_matrix,
-        );
-    }
-
-    // initializes a screen of 20x10 characters with a target of 3 frames per second
-    // coordinates will range from [0,0] to [19,9]
-    let mut engine = console_engine::ConsoleEngine::init(20, 10, 3).unwrap();
+    let mut engine = console_engine::ConsoleEngine::init(149, 35, 3).unwrap();
     let _value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
     loop {
-        engine.wait_frame(); // wait for next frame + capture inputs
-        engine.clear_screen(); // reset the screen
+        let mesh_cube = Mesh {
+            tris: vec![
+                // SOUTH
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                // EAST
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                    ],
+                },
+                // NORTH
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                    ],
+                },
+                // WEST
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                // TOP
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 0.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 1.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                // BOTTON
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+                Triangle {
+                    points: [
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 1.0_f64,
+                        },
+                        Point {
+                            x: 0.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                        Point {
+                            x: 1.0_f64,
+                            y: 0.0_f64,
+                            z: 0.0_f64,
+                        },
+                    ],
+                },
+            ],
+        };
+        engine.wait_frame();
+        // wait for next frame + capture inputs
+        engine.clear_screen();
 
-        draw_triangle(&mut engine, 0, 0, 0, 10, 10, 0);
+        for triangle in mesh_cube.tris {
+            let mut triangle_projected = Triangle {
+                points: [
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                ],
+            };
+
+            multiply_matrix_point(
+                &triangle.points[0],
+                &mut triangle_projected.points[0],
+                &projection_matrix,
+            );
+            multiply_matrix_point(
+                &triangle.points[1],
+                &mut triangle_projected.points[1],
+                &projection_matrix,
+            );
+            multiply_matrix_point(
+                &triangle.points[2],
+                &mut triangle_projected.points[2],
+                &projection_matrix,
+            );
+            triangle_projected.points[0].x += 1.0;
+            triangle_projected.points[0].y += 1.0;
+            triangle_projected.points[1].x += 1.0;
+            triangle_projected.points[1].y += 1.0;
+            triangle_projected.points[2].x += 1.0;
+            triangle_projected.points[2].y += 1.0;
+            triangle_projected.points[0].x *= 0.5 * width;
+            triangle_projected.points[0].y *= 0.5 * height;
+            triangle_projected.points[1].x *= 0.5 * width;
+            triangle_projected.points[1].y *= 0.5 * height;
+            triangle_projected.points[2].x *= 0.5 * width;
+            triangle_projected.points[2].y *= 0.5 * height;
+
+            draw_triangle(
+                &mut engine,
+                triangle_projected.points[0].x as i32,
+                triangle_projected.points[0].y as i32,
+                triangle_projected.points[1].x as i32,
+                triangle_projected.points[1].y as i32,
+                triangle_projected.points[2].x as i32,
+                triangle_projected.points[2].y as i32,
+            );
+        }
 
         if engine.is_key_pressed(KeyCode::Char('q')) {
             // if the user presses 'q' :
             break; // exits app
+        }
+
+        if engine.is_key_pressed(KeyCode::Char('a')) {
+            engine.line(30, 34, 40, 31, pixel::pxl('#'));
         }
 
         engine.draw(); // draw the screen
