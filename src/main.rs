@@ -153,6 +153,7 @@ fn main() {
             break; // exits app
         }
     
+        
         engine.draw(); // draw the screen
     }
 }
