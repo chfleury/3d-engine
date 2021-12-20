@@ -66,7 +66,7 @@ fn main() {
     projection_matrix.m[2][3] = 1.0;
     projection_matrix.m[3][3] = 0.0;
 
-    let mut engine = console_engine::ConsoleEngine::init(600, 240, 3).unwrap();
+    let mut engine = console_engine::ConsoleEngine::init(600, 240, 6).unwrap();
     let _value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
     let mut f_theta = 0.0;
@@ -314,7 +314,7 @@ fn main() {
         // wait for next frame + capture inputs
         engine.clear_screen();
 
-        f_theta += 1.0;
+        f_theta += 0.5;
 
         // ROTATION Z
         let mut rotation_matrix_z = [[0.0; 4]; 4];
