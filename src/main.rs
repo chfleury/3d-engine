@@ -33,11 +33,11 @@ fn draw_triangle(
     engine.line(x3, y3, x1, y1, pixel::pxl('#'));
 }
 
-fn multiply_matrix_point(i: &Point, o: &mut Point, m: &Matrix4x4) {
-    o.x = i.x * m.m[0][0] + i.y * m.m[1][0] + i.z * m.m[2][0] + m.m[3][0];
-    o.y = i.x * m.m[0][1] + i.y * m.m[1][1] + i.z * m.m[2][1] + m.m[3][1];
-    o.z = i.x * m.m[0][2] + i.y * m.m[1][2] + i.z * m.m[2][2] + m.m[3][2];
-    let w = (i.x * m.m[0][3] + i.y * m.m[1][3] + i.z * m.m[2][3] + m.m[3][3]) as f64;
+fn multiply_matrix_point(i: &Point, o: &mut Point, m: &[[f64; 4]; 4]) {
+    o.x = i.x * m[0][0] + i.y * m[1][0] + i.z * m[2][0] + m[3][0];
+    o.y = i.x * m[0][1] + i.y * m[1][1] + i.z * m[2][1] + m[3][1];
+    o.z = i.x * m[0][2] + i.y * m[1][2] + i.z * m[2][2] + m[3][2];
+    let w = (i.x * m[0][3] + i.y * m[1][3] + i.z * m[2][3] + m[3][3]) as f64;
 
     if w != 0.0 {
         o.x /= w;
@@ -69,6 +69,8 @@ fn main() {
     let mut engine = console_engine::ConsoleEngine::init(149, 33, 3).unwrap();
     let _value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
+    let mut f_theta = 0.0;
+
     loop {
         let mesh_cube = Mesh {
             tris: vec![
@@ -312,6 +314,28 @@ fn main() {
         // wait for next frame + capture inputs
         engine.clear_screen();
 
+        f_theta += 1.0;
+
+        // ROTATION Z
+        let mut rotation_matrix_z = [[0.0; 4]; 4];
+        let temp = (f_theta * 0.5) as f64;
+        rotation_matrix_z[0][0] = temp.cos();
+        rotation_matrix_z[0][1] = temp.sin();
+        rotation_matrix_z[1][0] = -temp.sin();
+        rotation_matrix_z[1][1] = temp.cos();
+        rotation_matrix_z[2][2] = 1.0;
+        rotation_matrix_z[3][3] = 1.0;
+
+        // ROTATION X
+        let mut rotation_matrix_x = [[0.0; 4]; 4];
+        let temp = (f_theta * 0.5) as f64;
+        rotation_matrix_x[0][0] = 1.0;
+        rotation_matrix_x[1][1] = temp.cos();
+        rotation_matrix_x[1][2] = temp.sin();
+        rotation_matrix_x[2][1] = -temp.sin();
+        rotation_matrix_x[2][2] = temp.cos();
+        rotation_matrix_x[3][3] = 1.0;
+
         for triangle in mesh_cube.tris {
             let mut triangle_projected = Triangle {
                 points: [
@@ -332,8 +356,83 @@ fn main() {
                     },
                 ],
             };
+            let mut triangle_rotated_z = Triangle {
+                points: [
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                ],
+            };
+            let mut triangle_rotated_x = Triangle {
+                points: [
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                    Point {
+                        x: 0.0_f64,
+                        y: 0.0_f64,
+                        z: 0.0_f64,
+                    },
+                ],
+            };
+            // ROTATE Z
+            multiply_matrix_point(
+                &triangle.points[0],
+                &mut triangle_rotated_z.points[0],
+                &rotation_matrix_z,
+            );
 
-            let mut triangle_translated = triangle;
+            multiply_matrix_point(
+                &triangle.points[1],
+                &mut triangle_rotated_z.points[1],
+                &rotation_matrix_z,
+            );
+
+            multiply_matrix_point(
+                &triangle.points[2],
+                &mut triangle_rotated_z.points[2],
+                &rotation_matrix_z,
+            );
+
+            // ROTATE X
+            multiply_matrix_point(
+                &triangle_rotated_z.points[0],
+                &mut triangle_rotated_x.points[0],
+                &rotation_matrix_x,
+            );
+
+            multiply_matrix_point(
+                &triangle_rotated_z.points[1],
+                &mut triangle_rotated_x.points[1],
+                &rotation_matrix_x,
+            );
+
+            multiply_matrix_point(
+                &triangle_rotated_z.points[2],
+                &mut triangle_rotated_x.points[2],
+                &rotation_matrix_x,
+            );
+
+            let mut triangle_translated = triangle_rotated_x;
             triangle_translated.points[0].z += 1.2;
             triangle_translated.points[1].z += 1.2;
             triangle_translated.points[2].z += 1.2;
@@ -341,17 +440,17 @@ fn main() {
             multiply_matrix_point(
                 &triangle_translated.points[0],
                 &mut triangle_projected.points[0],
-                &projection_matrix,
+                &projection_matrix.m,
             );
             multiply_matrix_point(
                 &triangle_translated.points[1],
                 &mut triangle_projected.points[1],
-                &projection_matrix,
+                &projection_matrix.m,
             );
             multiply_matrix_point(
                 &triangle_translated.points[2],
                 &mut triangle_projected.points[2],
-                &projection_matrix,
+                &projection_matrix.m,
             );
             triangle_projected.points[0].x += 1.0;
             triangle_projected.points[0].y += 1.0;
