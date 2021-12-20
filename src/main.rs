@@ -47,8 +47,8 @@ fn multiply_matrix_point(i: &Point, o: &mut Point, m: &[[f64; 4]; 4]) {
 }
 
 fn main() {
-    let height = 33.0;
-    let width = 149.0;
+    let height = 240.0;
+    let width = 600.0;
 
     let f_near = 0.1;
     let f_far = 1000.0;
@@ -66,7 +66,7 @@ fn main() {
     projection_matrix.m[2][3] = 1.0;
     projection_matrix.m[3][3] = 0.0;
 
-    let mut engine = console_engine::ConsoleEngine::init(149, 33, 3).unwrap();
+    let mut engine = console_engine::ConsoleEngine::init(600, 240, 3).unwrap();
     let _value = 14;
     // main loop, be aware that you'll have to break it because ctrl+C is captured
     let mut f_theta = 0.0;
@@ -433,9 +433,9 @@ fn main() {
             );
 
             let mut triangle_translated = triangle_rotated_x;
-            triangle_translated.points[0].z += 1.2;
-            triangle_translated.points[1].z += 1.2;
-            triangle_translated.points[2].z += 1.2;
+            triangle_translated.points[0].z += 3.0;
+            triangle_translated.points[1].z += 3.0;
+            triangle_translated.points[2].z += 3.0;
 
             multiply_matrix_point(
                 &triangle_translated.points[0],
